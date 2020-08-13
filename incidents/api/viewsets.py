@@ -75,7 +75,10 @@ class IncidentsViewSet(viewsets.ModelViewSet):
         user_id = request.auth.payload['user_id']
         dados = request.data
 
-        valor = float(dados['value'].split('R$')[1].replace('.', '').replace(',', '.'))
+        if isinstance(dados['value'], str):
+            valor = float(dados['value'].split('R$')[1].replace('.', '').replace(',', '.'))
+        else:
+            valor = dados['value']
 
         if user_id is '' or user_id is None:
             ong = Ong.objects.get(id=dados['ong'])
