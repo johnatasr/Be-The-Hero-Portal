@@ -30,10 +30,6 @@ ALLOWED_HOSTS = ['*']
 
 # Application definition
 
-EXT_APPS = [
-
-]
-
 INSTALLED_APPS = [
     'django.contrib.admin',
     'django.contrib.auth',
@@ -51,7 +47,7 @@ INSTALLED_APPS = [
     'incidents',
     'ongs',
     'frontend'
-] + EXT_APPS
+]
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
