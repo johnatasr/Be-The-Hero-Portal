@@ -21,6 +21,7 @@ class IncidentsViewSet(viewsets.ModelViewSet):
         query_id = request.query_params['id']
 
         queryset = Incident.objects.filter(ong__id=query_id).order_by('id')
+        ong = Ong.objects.filter(id=query_id).first()
         serializer = IncidentSerializer(queryset, many=True).data
 
         total = len(serializer)
@@ -40,7 +41,7 @@ class IncidentsViewSet(viewsets.ModelViewSet):
             }
             lista_incidents.append(payload)
 
-        return Response({'incidents': lista_incidents, 'total': total}, status=HTTP_200_OK)
+        return Response({'incidents': lista_incidents, 'total': total, 'ong': ong.title}, status=HTTP_200_OK)
 
     @action(methods=['GET'], detail=False)
     def allIncidents(self, request):

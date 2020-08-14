@@ -46,10 +46,11 @@ export default function Profile() {
                     
                     if ( response.data.total > 0 ) {
                         setIncidents(response.data.incidents);
-                        setName(response.data.incidents[0].ong.name);
+                        setName(response.data.ong);
                         setTotal(response.data.total);
                         setLoaded(true);
                     } else {
+                        setName(response.data.ong);
                         setAlert(true);
                         setMsgAlert("Ong não possui nenhum incidente !");
                     }
