@@ -60,7 +60,7 @@ export default function Register() {
             };
     
             try {          
-                let createUserResponse = await axios.post('http://192.168.0.47:8000/core/user/create/', dataUserCreation)
+                let createUserResponse = await axios.post('https://betheherodjango.herokuapp.com/core/user/create/', dataUserCreation)
     
                 if ( createUserResponse.data != null || createUserResponse.data != undefined || 
                     createUserResponse.status == 200 || createUserResponse.status == 201) {

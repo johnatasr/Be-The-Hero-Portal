@@ -1,7 +1,7 @@
 import axios from 'axios'
 
 const axiosInstance = axios.create({
-    baseURL: 'http://192.168.0.47:8000/',
+    baseURL: 'https://betheherodjango.herokuapp.com/',
     timeout: 5000,
     headers: {
         'Authorization': "JWT " + localStorage.getItem('access_token'),
