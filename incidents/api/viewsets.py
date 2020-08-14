@@ -80,7 +80,7 @@ class IncidentsViewSet(viewsets.ModelViewSet):
         else:
             valor = dados['value']
 
-        if user_id is '' or user_id is None:
+        if user_id == '' or user_id is None:
             ong = Ong.objects.get(id=dados['ong'])
         else:
             ong = Ong.objects.get(user__id=user_id, id=dados['ong'])
