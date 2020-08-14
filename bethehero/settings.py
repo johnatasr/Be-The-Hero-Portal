@@ -97,7 +97,7 @@ if 'test' in sys.argv:
 
 else:
     DATABASES = {}
-    DATABASES['default'] = dj_database_url.config(conn_max_age=600, ssl_require=True)
+    DATABASES['default'] = dj_database_url.parse('postgres://zcrhfhghhqxtpw:55e799dd75ea5194affe661fd104a9850e81e6012b7630da2a9b5ae19c9c7a1e@ec2-54-174-221-35.compute-1.amazonaws.com:5432/ddia9369f2pb5a', conn_max_age=600)
 
 # Password validation
 # https://docs.djangoproject.com/en/3.0/ref/settings/#auth-password-validators
