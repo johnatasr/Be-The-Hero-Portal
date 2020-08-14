@@ -112,7 +112,7 @@ class IncidentsViewSet(viewsets.ModelViewSet):
     def searchIncidents(self, request):
         query = request.query_params['title']
 
-        queryset = Incident.objects.filter(title__startswith=query).order_by('id')
+        queryset = Incident.objects.filter(title__istartswith=query).order_by('id')
         serializer = IncidentSerializer(queryset, many=True).data
 
 
