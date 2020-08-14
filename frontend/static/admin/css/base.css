@@ -16,12 +16,12 @@ body {
 /* LINKS */
 
 a:link, a:visited {
-    color: #447e9b;
+    color: #000000;
     text-decoration: none;
 }
 
 a:focus, a:hover {
-    color: #036;
+    color: #737380;
 }
 
 a:focus {
@@ -447,7 +447,7 @@ select[multiple] {
 /* FORM BUTTONS */
 
 .button, input[type=submit], input[type=button], .submit-row input, a.button {
-    background: #79aec8;
+    background: #e02041;
     padding: 10px 15px;
     border: none;
     border-radius: 4px;
@@ -520,7 +520,7 @@ input[type=button][disabled].default {
     font-weight: 400;
     font-size: 13px;
     text-align: left;
-    background: #79aec8;
+    background: #e02041;
     color: #fff;
 }
 
@@ -824,9 +824,9 @@ table#change-history tbody th {
     width: auto;
     height: 40px;
     padding: 10px 40px;
-    background: #417690;
+    background: #e02041;
     line-height: 40px;
-    color: #ffc;
+    color: #fff;
     overflow: hidden;
 }
 
