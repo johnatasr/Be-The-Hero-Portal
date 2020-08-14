@@ -27,11 +27,18 @@ export default function Logon() {
 
         try {
             const response = await api.post("core/token/obtain/", data);
-            api.defaults.headers['Authorization'] = "JWT " + response.data.access;
-            localStorage.setItem('access_token', response.data.access);
-            localStorage.setItem('refresh_token', response.data.refresh);
-            history.push('/selectOng');
-            
+
+            if (response.status == 401) {
+                setShowAlertModal(true)
+                setAlertModalTitle("Não foi possível fazer login!")
+                setAlertModal("Verifique sua senha ou e-mail...")
+            } else {
+                api.defaults.headers['Authorization'] = "JWT " + response.data.access;
+                localStorage.setItem('access_token', response.data.access);
+                localStorage.setItem('refresh_token', response.data.refresh);
+                history.push('/selectOng');
+            }
+                      
         } catch (err) {
             setShowAlertModal(true)
             setAlertModalTitle("Não foi possível fazer login!")
