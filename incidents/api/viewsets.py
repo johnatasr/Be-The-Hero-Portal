@@ -41,7 +41,7 @@ class IncidentsViewSet(viewsets.ModelViewSet):
             }
             lista_incidents.append(payload)
 
-        return Response({'incidents': lista_incidents, 'total': total, 'ong': ong.title}, status=HTTP_200_OK)
+        return Response({'incidents': lista_incidents, 'total': total, 'ong': ong.name}, status=HTTP_200_OK)
 
     @action(methods=['GET'], detail=False)
     def allIncidents(self, request):
