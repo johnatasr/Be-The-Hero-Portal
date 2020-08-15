@@ -74,6 +74,8 @@ export default function Register() {
                     let createOngResponse = await ongService.createOng(dataOngCreation, 'ong');
                     
                     if ( createOngResponse == true ){
+                        localStorage.removeItem('access_token', response.data.access);
+                        localStorage.removeItem('refresh_token', response.data.refresh);
                         history.push('/');
                     } else {
                         setShowAlertModal(true)

@@ -60,6 +60,8 @@ export default function Profile() {
                     setAlert(true);
                     setMsgAlert("Erro ao carregar incidentes :(");
                     history.push('/');
+                    localStorage.removeItem('access_token', response.data.access);
+                    localStorage.removeItem('refresh_token', response.data.refresh);
                 }
             }     
         }
@@ -164,7 +166,9 @@ export default function Profile() {
     }
 
     function handleLogout() {
-        localStorage.clear();
+        localStorage.removeItem('access_token', response.data.access);
+        localStorage.removeItem('refresh_token', response.data.refresh);
+                    
         history.push('/');
     }
 
