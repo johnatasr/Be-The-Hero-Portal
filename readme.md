@@ -33,6 +33,9 @@ Passos para executar o projeto:
 2. pip install -r requiremts.txt
 3. python manage.py runserver
 
+## Link Portal
+https://betheherodjango.herokuapp.com/
+
 
 ## Link do repositório Mobile 
 
