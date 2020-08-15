@@ -60,8 +60,7 @@ export default function Profile() {
                     setAlert(true);
                     setMsgAlert("Erro ao carregar incidentes :(");
                     history.push('/');
-                    localStorage.removeItem('access_token', response.data.access);
-                    localStorage.removeItem('refresh_token', response.data.refresh);
+                    localStorage.clear();
                 }
             }     
         }
@@ -84,6 +83,7 @@ export default function Profile() {
         catch (error){
             alert(`Erro em deletar incidente: ${error}`);
             history.push('/');
+            localStorage.clear();
         }
     }
 
@@ -117,6 +117,7 @@ export default function Profile() {
             setAlert(true);
             setMsgAlert("Erro ao carregar incidentes :(");
             history.push('/');
+            localStorage.clear();
         }
     }
 
@@ -148,6 +149,7 @@ export default function Profile() {
             setAlert(true);
             setMsgAlert("Não foi possível concluir a pesquisa :(");
             history.push('/');
+            localStorage.clear();
         }
     }
 
@@ -166,9 +168,7 @@ export default function Profile() {
     }
 
     function handleLogout() {
-        localStorage.removeItem('access_token', response.data.access);
-        localStorage.removeItem('refresh_token', response.data.refresh);
-                    
+        localStorage.clear();
         history.push('/');
     }
 
