@@ -34,6 +34,7 @@ export default function Profile() {
     const [ showDelete, setShowDelete ] = useState(false);
 
     const [ idOng, setIdOng ] = useState('');
+    let id = localStorage.getItem('id_ong')
 
     const incidentService = new IncidentService();
     
@@ -45,7 +46,7 @@ export default function Profile() {
 
             if ( loaded != true ) {
                 try {
-                    const response = await incidentService.getIncidents(idOng, page);
+                    const response = await incidentService.getIncidents(id, page);
                     
                     if ( response.data.total > 0 ) {
                         setIncidents(response.data.incidents);
@@ -75,7 +76,7 @@ export default function Profile() {
           clearInterval(interval);
         }
 
-    }, [idOng])
+    }, [id])
 
     
     async function handleDeleteIncident (id){
@@ -183,7 +184,11 @@ export default function Profile() {
         setIdOng('');
         setIncidents([]);
         setlistIncidentsSearch([]);
-        localStorage.clear();
+
+
+        localStorage.removeItem('id_ong');
+        localStorage.removeItem('access_token');
+        localStorage.removeItem('refresh_token');
         history.push('/');
     }
 
