@@ -74,7 +74,41 @@ export default function Profile() {
     
     }, [localStorage.getItem('id_ong')])
 
-    
+    async function updateIncidents() {
+
+        let idOng = localStorage.getItem('id_ong')
+
+        if ( loaded != true ) {
+            try {
+                setAlert(true);
+                setMsgAlert("Carregando ...");
+                const response = await incidentService.getIncidents(idOng, page);
+                
+                setAlert(false);
+                setMsgAlert("");
+
+                if ( response.data.total > 0 ) {
+                    setIncidents(response.data.incidents);
+                    setName(response.data.ong);
+                    setTotal(response.data.total);
+                    setLoaded(true);
+                } else {
+                    setName(response.data.ong);
+                    setAlert(true);
+                    setMsgAlert("Ong não possui nenhum incidente !");
+                }
+                
+            }
+            catch (error) {
+                setAlert(true);
+                setMsgAlert("Erro ao carregar incidentes :(");
+                history.push('/');
+                localStorage.clear();
+            }
+        }     
+    }
+
+
     async function handleDeleteIncident (id){
         try {
             const ongId = localStorage.getItem('id_ong')
@@ -84,9 +118,8 @@ export default function Profile() {
             setTotal(total - 1);
             setShowDelete(false)
     
-            await searchIncidentsStart()
-        }
-        catch (error){
+            await updateIncidents();
+        } catch (error){
             alert(`Erro em deletar incidente: ${error}`);
             history.push('/');
             localStorage.clear();
