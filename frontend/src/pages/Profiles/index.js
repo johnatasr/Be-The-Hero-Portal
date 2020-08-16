@@ -35,7 +35,7 @@ export default function Profile() {
 
 
     const incidentService = new IncidentService();
-    const id = localStorage.getItem('id_ong');
+    let id = localStorage.getItem('id_ong');
 
     useEffect(() => {
         async function searchIncidentsStart() {
