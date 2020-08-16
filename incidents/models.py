@@ -9,4 +9,4 @@ class Incident(models.Model):
     ong = models.ForeignKey(Ong, on_delete=models.CASCADE, null=True)
 
     def __str__(self):
-        return self.title
+        return f'{self.title}  -  Valor : R$ {self.value}'

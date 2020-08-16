@@ -83,12 +83,13 @@ export default function Profile() {
             setIncidents(incidents.filter(incident => incident.id !== id ));
             setTotal(total - 1);
             setShowDelete(false)
-            searchIncidentsStart()
 
             if ( total == 0 ) {
                 setAlert(true);
                 setMsgAlert("Ong não possui nenhum incidente !");
             }
+
+            searchIncidentsStart()
 
         }
         catch (error){
@@ -178,6 +179,8 @@ export default function Profile() {
     }
 
     function handleLogout() {
+        setIncidents([]);
+        setlistIncidentsSearch([]);
         localStorage.clear();
         history.push('/');
     }
