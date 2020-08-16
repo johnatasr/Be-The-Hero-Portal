@@ -36,7 +36,6 @@ export default function NewOng() {
 
         try {                     
             let createOngResponse = await ongService.createOng(dataOngCreation, 'ong');
-            console.log(createOngResponse)
             if ( createOngResponse == true ){
                 history.push('/selectOng');
             } else {
@@ -69,7 +68,7 @@ export default function NewOng() {
                     <h1>Cadastro</h1>
                     <p>Faça seu cadastro, entre na plataforma e ajude pessoas a encontrarem os casos da sua ONG</p>
 
-                    <Link className='buttton-back' to='/selectOng'>
+                    <Link className='buttton-back' style={{ textDecoration: 'none' }} to='/selectOng'>
                         <FiArrowLeft size={16} color="#E02041" />
                         Voltar para seleção de ONGs
                     </Link>

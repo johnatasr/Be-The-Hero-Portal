@@ -56,17 +56,22 @@ export default function Profile() {
                     }
                     
                 }
+
                 catch (error) {
                     setAlert(true);
                     setMsgAlert("Erro ao carregar incidentes :(");
                     history.push('/');
                     localStorage.clear();
                 }
-            }     
-        }
-    
+            }
+        } 
         searchIncidentsStart();
-    
+
+        const interval = setInterval(() => searchIncidents(), 10000)
+        return () => {
+          clearInterval(interval);
+        }
+
     }, [localStorage.getItem('id_ong')])
 
     
@@ -79,6 +84,12 @@ export default function Profile() {
             setTotal(total - 1);
             setShowDelete(false)
             searchIncidentsStart()
+
+            if ( total == 0 ) {
+                setAlert(true);
+                setMsgAlert("Ong não possui nenhum incidente !");
+            }
+
         }
         catch (error){
             alert(`Erro em deletar incidente: ${error}`);
@@ -92,7 +103,6 @@ export default function Profile() {
         try {
             setShowDelete(true)
             setIdIncident(id)
-            console.log(id)
         }
         catch (error){
             console.log(error)
@@ -196,7 +206,7 @@ export default function Profile() {
 
                     <span>Total de Incidentes: <b>{total}</b> </span>
 
-                    <Link className='button' to='/newincident'>Cadastrar novo caso</Link>
+                    <Link className='button' style={{ textDecoration: 'none' }} to='/newincident'>Cadastrar novo caso</Link>
                     <button type='button' onClick={logout}>
                         <FiPower size={18} color='#e02041'/>
                     </button>

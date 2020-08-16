@@ -63,7 +63,7 @@ export default function NewIncident() {
                     <h1>Cadastro novo caso</h1>
                     <p>Descreva o caso detalhadamente para encontrar um herói que resolva isso</p>
 
-                    <Link className='buttton-back' to='/profiles'>
+                    <Link className='buttton-back' style={{ textDecoration: 'none' }} to='/profiles'>
                         <FiArrowLeft size={16} color="#E02041" />
                         Voltar para home
                     </Link>

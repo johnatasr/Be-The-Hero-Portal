@@ -218,3 +218,10 @@ SIMPLE_JWT = {
 # ]
 
 
+# Elasticsearch configuration
+# ELASTICSEARCH_DSL = {
+#     'default': {
+#         'hosts': 'localhost:9200'
+#     },
+# }
+
