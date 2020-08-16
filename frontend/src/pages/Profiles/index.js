@@ -33,21 +33,22 @@ export default function Profile() {
     const [ showLogout, setShowLogout ] = useState(false);
     const [ showDelete, setShowDelete ] = useState(false);
 
-    const [ idOng, setIdOng ] = useState('');
-    let id = localStorage.getItem('id_ong')
 
     const incidentService = new IncidentService();
-    
+    let id = localStorage.getItem('id_ong');
+
     useEffect(() => {
-
-        setIdOng(localStorage.getItem('id_ong'))
-
         async function searchIncidentsStart() {
 
             if ( loaded != true ) {
                 try {
+                    setAlert(true);
+                    setMsgAlert("Carregando ...");
                     const response = await incidentService.getIncidents(id, page);
                     
+                    setAlert(false);
+                    setMsgAlert("");
+
                     if ( response.data.total > 0 ) {
                         setIncidents(response.data.incidents);
                         setName(response.data.ong);
@@ -60,37 +61,30 @@ export default function Profile() {
                     }
                     
                 }
-
                 catch (error) {
                     setAlert(true);
                     setMsgAlert("Erro ao carregar incidentes :(");
                     history.push('/');
                     localStorage.clear();
                 }
-            }
-        } 
+            }     
+        }
+    
         searchIncidentsStart();
-
-    }, [id])
+    
+    }, [localStorage.getItem('id_ong')])
 
     
-    async function handleDeleteIncident (idInc){
+    async function handleDeleteIncident (id){
         try {
-            await incidentService.deleteIncident(idInc, idOng)
+            const ongId = localStorage.getItem('id_ong')
+            await incidentService.deleteIncident(id, ongId)
 
-            setIncidents(incidents.filter(incident => incident.id !== idInc ));
+            setIncidents(incidents.filter(incident => incident.id !== id ));
             setTotal(total - 1);
-            setShowDelete(false);
-
-            if ( total == 0 || total == '0') {
-                setAlert(true);
-                setMsgAlert("Ong não possui nenhum incidente !");
-            }
-
-            id = localStorage.getItem('')
-
-            searchIncidentsStart()
-
+            setShowDelete(false)
+    
+            await searchIncidentsStart()
         }
         catch (error){
             alert(`Erro em deletar incidente: ${error}`);
@@ -114,7 +108,7 @@ export default function Profile() {
         try {
             
             setActive(numberPage);
-            const response = await incidentService.getIncidents(idOng, numberPage);
+            const response = await incidentService.getIncidents(id, numberPage);
     
             if ( response.data.total > 0 ) {
                 setIncidents(response.data.incidents);
@@ -141,8 +135,9 @@ export default function Profile() {
     async function searchIncidents() {
         try {  
             if ( titleSearch != '' | titleSearch != undefined ){
-                const response = await incidentService.searchIncidents(idOng, titleSearch);
-                
+                const response = await incidentService.searchIncidents(id, titleSearch);
+                console.log(response)
+
                 if ( response.data.incidents.length > 0 ) {
                     setAlert(false);
                     setActiveListSearch(true);
@@ -178,14 +173,10 @@ export default function Profile() {
     }
 
     function handleLogout() {
-        setIdOng('');
         setIncidents([]);
         setlistIncidentsSearch([]);
-
-
-        localStorage.removeItem('id_ong');
-        localStorage.removeItem('access_token');
-        localStorage.removeItem('refresh_token');
+        id = '';
+        localStorage.clear();
         history.push('/');
     }
 
@@ -213,7 +204,7 @@ export default function Profile() {
 
                     <span>Total de Incidentes: <b>{total}</b> </span>
 
-                    <Link className='button' style={{ textDecoration: 'none' }} to='/newincident'>Cadastrar novo caso</Link>
+                    <Link className='button' to='/newincident'>Cadastrar novo caso</Link>
                     <button type='button' onClick={logout}>
                         <FiPower size={18} color='#e02041'/>
                     </button>
@@ -272,7 +263,7 @@ export default function Profile() {
                         :
                         <>  
                             <ul>
-                                {
+                                { 
                                     activeListSearch ?
                                         currentIncidents.map( incident => (
                                             <li key={incident.id}>
