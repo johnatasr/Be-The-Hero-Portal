@@ -79,11 +79,11 @@ export default function Profile() {
     }, [id])
 
     
-    async function handleDeleteIncident (id){
+    async function handleDeleteIncident (idInc){
         try {
-            await incidentService.deleteIncident(id, idOng)
+            await incidentService.deleteIncident(idInc, idOng)
 
-            setIncidents(incidents.filter(incident => incident.id !== id ));
+            setIncidents(incidents.filter(incident => incident.id !== idInc ));
             setTotal(total - 1);
             setShowDelete(false);
 
@@ -91,6 +91,8 @@ export default function Profile() {
                 setAlert(true);
                 setMsgAlert("Ong não possui nenhum incidente !");
             }
+
+            id = localStorage.getItem('id_ong')
 
             searchIncidentsStart()
 
