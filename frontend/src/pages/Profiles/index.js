@@ -72,7 +72,7 @@ export default function Profile() {
           clearInterval(interval);
         }
 
-    }, [localStorage.getItem('id_ong')])
+    }, [id])
 
     
     async function handleDeleteIncident (id){
@@ -84,7 +84,7 @@ export default function Profile() {
             setTotal(total - 1);
             setShowDelete(false)
 
-            if ( total == 0 ) {
+            if ( total == 0 || total == '0') {
                 setAlert(true);
                 setMsgAlert("Ong não possui nenhum incidente !");
             }
@@ -179,6 +179,7 @@ export default function Profile() {
     }
 
     function handleLogout() {
+        id = '';
         setIncidents([]);
         setlistIncidentsSearch([]);
         localStorage.clear();
