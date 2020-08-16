@@ -83,12 +83,15 @@ export default function Profile() {
             await incidentService.deleteIncident(id, ongId)
 
             setIncidents(incidents.filter(incident => incident.id !== id ));
-            setTotal(total - 1);
-            setLoaded(false)
             
-            await searchIncidentsStart()
-
+            if ( total == 1 ) {
+                setAlert(true);
+                setMsgAlert("Ong não possui nenhum incidente !");
+                setTotal(total - 1);
+            }
+                     
             setShowDelete(false)       
+
         } catch (error){
             history.push('/');
             localStorage.clear();
