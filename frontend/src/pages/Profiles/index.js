@@ -55,6 +55,7 @@ export default function Profile() {
                         setTotal(response.data.total);
                         setLoaded(true);
                     } else {
+                        setLoaded(true)
                         setName(response.data.ong);
                         setAlert(true);
                         setMsgAlert("Ong não possui nenhum incidente !");
@@ -74,40 +75,7 @@ export default function Profile() {
     
     }, [localStorage.getItem('id_ong')])
 
-    async function updateIncidents() {
-
-        let idOng = localStorage.getItem('id_ong')
-
-        if ( loaded != true ) {
-            try {
-                setAlert(true);
-                setMsgAlert("Carregando ...");
-                const response = await incidentService.getIncidents(idOng, page);
-                
-                setAlert(false);
-                setMsgAlert("");
-
-                if ( response.data.total > 0 ) {
-                    setIncidents(response.data.incidents);
-                    setName(response.data.ong);
-                    setTotal(response.data.total);
-                    setLoaded(true);
-                } else {
-                    setName(response.data.ong);
-                    setAlert(true);
-                    setMsgAlert("Ong não possui nenhum incidente !");
-                }
-                
-            }
-            catch (error) {
-                setAlert(true);
-                setMsgAlert("Erro ao carregar incidentes :(");
-                history.push('/');
-                localStorage.clear();
-            }
-        }     
-    }
-
+    
 
     async function handleDeleteIncident (id){
         try {
@@ -116,11 +84,12 @@ export default function Profile() {
 
             setIncidents(incidents.filter(incident => incident.id !== id ));
             setTotal(total - 1);
-            setShowDelete(false)
-    
-            await updateIncidents();
+            setLoaded(false)
+            
+            await searchIncidentsStart()
+
+            setShowDelete(false)       
         } catch (error){
-            alert(`Erro em deletar incidente: ${error}`);
             history.push('/');
             localStorage.clear();
         }

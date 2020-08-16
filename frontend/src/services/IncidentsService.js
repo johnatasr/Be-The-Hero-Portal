@@ -34,7 +34,7 @@ export default class IncidentsService{
     async createIncident(payload){
         const url = `api/incidents/createIncident/`;
         let response = await api.post(url, payload);
-        console.log(response)
+        
         if (response.status == 200 || response.status == 201) {
             return true
         }

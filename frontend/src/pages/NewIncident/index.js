@@ -38,8 +38,7 @@ export default function NewIncident() {
                 setValor('');
 
             } else {
-                alert(`Error em criar novo incidente: ${error}`)
-                setMsg('Erro ao salvar, tente outra hora !');
+                setMsg('Incidente não salvo, verifique os campos !');
                 setMsgColor('#F03131');
                 setTitulo('');
                 setDescricao('');
@@ -48,7 +47,6 @@ export default function NewIncident() {
             
         }
         catch (error) {
-            alert(`Error em criar novo incidente: ${error}`)
             setMsg('Erro ao salvar, tente outra hora !');
             setMsgColor('#F03131');
         }
