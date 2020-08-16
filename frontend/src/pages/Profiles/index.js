@@ -33,16 +33,19 @@ export default function Profile() {
     const [ showLogout, setShowLogout ] = useState(false);
     const [ showDelete, setShowDelete ] = useState(false);
 
+    const [ idOng, setIdOng ] = useState('');
 
     const incidentService = new IncidentService();
-    let id = localStorage.getItem('id_ong');
-
+    
     useEffect(() => {
+
+        setIdOng(localStorage.getItem('id_ong'))
+
         async function searchIncidentsStart() {
 
             if ( loaded != true ) {
                 try {
-                    const response = await incidentService.getIncidents(id, page);
+                    const response = await incidentService.getIncidents(idOng, page);
                     
                     if ( response.data.total > 0 ) {
                         setIncidents(response.data.incidents);
@@ -72,17 +75,16 @@ export default function Profile() {
           clearInterval(interval);
         }
 
-    }, [id])
+    }, [idOng])
 
     
     async function handleDeleteIncident (id){
         try {
-            const ongId = localStorage.getItem('id_ong')
-            await incidentService.deleteIncident(id, ongId)
+            await incidentService.deleteIncident(id, idOng)
 
             setIncidents(incidents.filter(incident => incident.id !== id ));
             setTotal(total - 1);
-            setShowDelete(false)
+            setShowDelete(false);
 
             if ( total == 0 || total == '0') {
                 setAlert(true);
@@ -114,7 +116,7 @@ export default function Profile() {
         try {
             
             setActive(numberPage);
-            const response = await incidentService.getIncidents(id, numberPage);
+            const response = await incidentService.getIncidents(idOng, numberPage);
     
             if ( response.data.total > 0 ) {
                 setIncidents(response.data.incidents);
@@ -141,9 +143,8 @@ export default function Profile() {
     async function searchIncidents() {
         try {  
             if ( titleSearch != '' | titleSearch != undefined ){
-                const response = await incidentService.searchIncidents(id, titleSearch);
-                console.log(response)
-
+                const response = await incidentService.searchIncidents(idOng, titleSearch);
+                
                 if ( response.data.incidents.length > 0 ) {
                     setAlert(false);
                     setActiveListSearch(true);
@@ -179,7 +180,7 @@ export default function Profile() {
     }
 
     function handleLogout() {
-        id = '';
+        setIdOng('');
         setIncidents([]);
         setlistIncidentsSearch([]);
         localStorage.clear();
