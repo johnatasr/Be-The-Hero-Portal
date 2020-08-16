@@ -42,7 +42,7 @@ export default function Profile() {
 
         setIdOng(localStorage.getItem('id_ong'))
 
-        async function searchIncidentsStart(id) {
+        async function searchIncidentsStart() {
 
             if ( loaded != true ) {
                 try {
@@ -69,12 +69,7 @@ export default function Profile() {
                 }
             }
         } 
-        searchIncidentsStart(idOng);
-
-        const interval = setInterval(() => searchIncidents(idOng), 30000)
-        return () => {
-          clearInterval(interval);
-        }
+        searchIncidentsStart();
 
     }, [id])
 
@@ -92,7 +87,7 @@ export default function Profile() {
                 setMsgAlert("Ong não possui nenhum incidente !");
             }
 
-            id = localStorage.getItem('id_ong')
+            id = localStorage.getItem('')
 
             searchIncidentsStart()
 
