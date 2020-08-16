@@ -42,7 +42,7 @@ export default function Profile() {
 
         setIdOng(localStorage.getItem('id_ong'))
 
-        async function searchIncidentsStart() {
+        async function searchIncidentsStart(id) {
 
             if ( loaded != true ) {
                 try {
@@ -69,9 +69,9 @@ export default function Profile() {
                 }
             }
         } 
-        searchIncidentsStart();
+        searchIncidentsStart(idOng);
 
-        const interval = setInterval(() => searchIncidents(), 10000)
+        const interval = setInterval(() => searchIncidents(idOng), 30000)
         return () => {
           clearInterval(interval);
         }
