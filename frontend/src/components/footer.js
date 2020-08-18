@@ -49,14 +49,18 @@ const Footer = () => {
         <Row>
             <Col></Col>
             <Col style={colRol1Center} xs={6}>
-                <AiFillGithub style={githubIcon} 
-                    onMouseOver={({target})=>target.style.color='#e02041'} 
-                    onMouseOut={({target})=>target.style.color='#fff'} 
-                    onClick={event =>  window.location.href='https://github.com/johnatasr'} />
-                <AiFillLinkedin style={linkedinIcon}
-                    onMouseOver={({target})=>target.style.color='#e02041'} 
-                    onMouseOut={({target})=>target.style.color='#fff'} 
-                    onClick={event =>  window.location.href='https://www.linkedin.com/in/johnatas-rabelo-690579117/'} />
+                <Col>
+                    <AiFillGithub style={githubIcon} 
+                        onMouseOver={({target})=>target.style.color='#e02041'} 
+                        onMouseOut={({target})=>target.style.color='#fff'} 
+                        onClick={event =>  window.location.href='https://github.com/johnatasr'} />
+                </Col>
+                <Col>
+                    <AiFillLinkedin style={linkedinIcon}
+                        onMouseOver={({target})=>target.style.color='#e02041'} 
+                        onMouseOut={({target})=>target.style.color='#fff'} 
+                        onClick={event =>  window.location.href='https://www.linkedin.com/in/johnatas-rabelo-690579117/'} />
+                </Col>   
             </Col>
             <Col></Col>
         </Row>
